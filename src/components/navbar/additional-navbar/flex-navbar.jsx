@@ -17,9 +17,9 @@ function NavbarFlex() {
         <li className="px-2 py-1 text-gray-300 rounded-lg duration-300 hover:text-yellow-500">
           Maqolalar
         </li>
-        <li className="px-2 py-1 text-gray-300 rounded-lg duration-300 hover:text-yellow-500">
+        {/* <li className="px-2 py-1 text-gray-300 rounded-lg duration-300 hover:text-yellow-500">
           <Link to="/login">Login</Link>
-        </li>
+        </li> */}
       </ul>
     </>
   );
