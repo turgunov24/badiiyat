@@ -3,13 +3,14 @@ import Navbar from "../navbar/navbar";
 import SectionOneSwiper from "./section-one-assets/section-one-swiper/swiper";
 import "./section-one.css";
 import jadidAdabiyoti from "../../data";
+import { data } from "autoprefixer";
 
 function SectionOne() {
+  console.log(jadidAdabiyoti);
   const [event, setevent] = useState("");
   const qidiruv = (e) => {
     setevent(event + e);
     console.log(e.target.value);
-
     
   };
   return (
@@ -42,13 +43,19 @@ function SectionOne() {
                 <li>Jadid adabiyoti </li>
                 <li>Sovet davri </li>
                 <li>Mustaqillik davri</li>
-            </ul>    
-                {/* console.log({jadidAdabiyoti}); */}
-                
+            </ul>
+            {jadidAdabiyoti.map((item,index)=>(
+                <div className="flex flex-wrap w-full">
+                    <div>
+                        <img src={item.images}/>
+                        <h1>{item.name}</h1>
+                    </div>
+                </div>
+            ))}        
         </div>
       </div>
     </div>
-  );
+    )
 }
 
 export default SectionOne;
