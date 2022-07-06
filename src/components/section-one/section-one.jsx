@@ -22,10 +22,10 @@ function SectionOne() {
         <SectionOneSwiper />
         <div
           id="search-div"
-          className="py-14 px-28 w-11/12 relative -top-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center justify-end gap-5"
+          className="py-8 px-2 w-11/12 relative -top-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center justify-end gap-5 sm:px-7 md:px-14 md:py-14 lg:px-28"
         >
           <h1 className="font-satisfy text-3xl">Qidirish</h1>
-          <form action="search" className="w-full flex justify-between">
+          <form action="search" className="w-full flex flex-col items-center gap-5 md:flex-row ">
             <input
               onChange={(event) =>{
                 setSearch(event.target.value)
@@ -33,7 +33,7 @@ function SectionOne() {
               type="text"
               maxLength={30}
               placeholder="Adiblar, kitoblar, audiolar, maqolalar..."
-              className="w-10/12 py-2 px-5 rounded-lg bg-gray-600 border-none outline-none"
+              className="w-60 py-2 px-5 rounded-lg bg-gray-600 border-none outline-none sm:w-11/12"
             />
             {jadidAdabiyoti.filter((val) =>{
                 if(setSearch == ""){
@@ -42,7 +42,8 @@ function SectionOne() {
                     
                 }
             })}
-            <button className="rounded-lg bg-orange-400 px-7 font-satisfy">
+            
+            <button className=" rounded-lg bg-orange-400 py-1 px-7 font-satisfy text-xl">
               Qidirish
             </button>
           </form>
@@ -51,7 +52,7 @@ function SectionOne() {
           <h1 className="font-satisfy text-3xl text-center">
             Asosiy kategoriyalar
           </h1>
-          <ul className="flex justify-between w-2/3 mt-5">
+          <ul className="flex justify-center w-2/3 mt-5 flex-wrap gap-10 items-center">
             <li>Temuriylar davri </li>
             <li>Jadid adabiyoti </li>
             <li>Sovet davri </li>
