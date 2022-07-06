@@ -6,12 +6,12 @@ import jadidAdabiyoti from "../../data";
 import { data } from "autoprefixer";
 
 function SectionOne() {
-  console.log(jadidAdabiyoti);
-  const [event, setevent] = useState("");
-  const qidiruv = (e) => {
-    setevent(event + e);
-    console.log(e.target.value);
-  };
+//   const [event, setevent] = useState("");
+  const [search, setSearch] = useState("")
+//   const qidiruv = (e) => {
+//     setevent(event + e);
+//     setSearch(e.target.value);
+//   };
   return (
     <div className="w-full flex flex-col items-center ">
       <Navbar />
@@ -24,18 +24,27 @@ function SectionOne() {
           <h1 className="font-satisfy text-3xl">Qidirish</h1>
           <form action="search" className="w-full flex justify-between">
             <input
-              onChange={qidiruv}
+              onChange={(event) =>{
+                setSearch(event.target.value)
+              }}
               type="text"
               maxLength={30}
               placeholder="Adiblar, kitoblar, audiolar, maqolalar..."
               className="w-10/12 py-2 px-5 rounded-lg bg-gray-600 border-none outline-none"
             />
+            {jadidAdabiyoti.filter((val) =>{
+                if(setSearch == ""){
+                    return val
+                }else if (val.name.includes(setSearch)) {
+                    
+                }
+            })}
             <button className="rounded-lg bg-orange-400 px-7 font-satisfy">
               Qidirish
             </button>
           </form>
         </div>
-        <div className="border w-full h-[500px] flex flex-col items-center">
+        <div className="border w-full h-[600px] flex flex-col items-center">
           <h1 className="font-satisfy text-3xl text-center">
             Asosiy kategoriyalar
           </h1>
@@ -50,9 +59,10 @@ function SectionOne() {
             className="flex flex-wrap justify-center gap-6 mt-10"
           >
             {jadidAdabiyoti.map((item, index) => (
-              <div key={index} className="border w-[170px] flex flex-col justify-between gap-2">
+              <div key={index} className="border w-[170px] text-center flex flex-col justify-between gap-2">
                 <img src={item.images} className="object-contain" />
-                <h1>{item.name}</h1>
+                <h1 className="text-[15px]">{item.name}</h1>
+                <h2 className="text-[12px] text-[#FFFFFF99]">{item.year}</h2>
               </div>
             ))}
           </div>
