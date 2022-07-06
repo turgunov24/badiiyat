@@ -2,7 +2,8 @@ import React from 'react';
 
 
 
-function SectionTwo() {
+function SectionTwo(props) {
+    console.log(props.id);
     return ( <div>
         <h1>hi</h1>
     </div> );

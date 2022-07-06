@@ -68,7 +68,7 @@ function SectionOne() {
                 <div
                   onClick={() => {
                     console.log(item.books);
-                    <SectionTwo className="hidden" item={item.id} />;
+                    <SectionTwo id={jadidAdabiyoti.id} className="hidden" item={item.id} />;
                   }}
                   id="card"
                   key={index}
