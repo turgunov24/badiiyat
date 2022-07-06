@@ -9,12 +9,15 @@ import MusicNoteIcon from '@mui/icons-material/MusicNote';
 import cardImage from "../assets/images/sectionOneCardImage.png"
 
 function SectionOne() {
-//   const [event, setevent] = useState("");
   const [search, setSearch] = useState("")
-//   const qidiruv = (e) => {
-//     setevent(event + e);
-//     setSearch(e.target.value);
-//   };
+  const qidiruv = (e) => {
+    setSearch(e.target.value);
+  };
+  let DataSearch = jadidAdabiyoti.filter(item =>{
+    return Object.keys(item).some(key => 
+        item[key].toString().toLowerCase().includes(search.toString().toLowerCase())
+    )
+  })
   return (
     <div className="w-full flex flex-col items-center ">
       <Navbar />
@@ -27,22 +30,12 @@ function SectionOne() {
           <h1 className="font-satisfy text-3xl">Qidirish</h1>
           <form action="search" className="w-full flex flex-col items-center gap-5 md:flex-row ">
             <input
-              onChange={(event) =>{
-                setSearch(event.target.value)
-              }}
-              type="text"
+              onChange={qidiruv}
               maxLength={30}
+              value={search}
               placeholder="Adiblar, kitoblar, audiolar, maqolalar..."
               className="w-60 py-2 px-5 rounded-lg bg-gray-600 border-none outline-none sm:w-11/12"
-            />
-            {jadidAdabiyoti.filter((val) =>{
-                if(setSearch == ""){
-                    return val
-                }else if (val.name.includes(setSearch)) {
-                    
-                }
-            })}
-            
+            /> 
             <button className=" rounded-lg bg-orange-400 py-1 px-7 font-satisfy text-xl">
               Qidirish
             </button>
@@ -62,13 +55,13 @@ function SectionOne() {
             id="grid-container"
             className="flex flex-wrap justify-center gap-6 mt-10"
           >
-            {jadidAdabiyoti.map((item, index) => (
+            {DataSearch.map((item, index) => (
               <div id="card" key={index} className="relative w-[170px] text-center flex flex-col justify-between rounded-2xl pb-3">
-                <img src={item.images} className="object-contain" />
+                <img src={item.images} className="object-contain" alt="smkac"/>
                 <h1 className="text-[15px]">{item.name}</h1>
                 <h2 className="text-[12px] text-[#FFFFFF99]">{item.year}</h2>
                 <div className="flex items-center justify-evenly mt-1 text-sm"><span className="text-white flex items-center gap-1"><MenuBookIcon /> 34</span> <span className="text-white flex items-center gap-1"><MusicNoteIcon /> 13</span> </div>
-                <img className="section-one-card-bgImage" src={cardImage}  />
+                <img className="section-one-card-bgImage" src={cardImage} alt='mod' />
               </div>
             ))}
           </div>
