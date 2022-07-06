@@ -4,6 +4,9 @@ import SectionOneSwiper from "./section-one-assets/section-one-swiper/swiper";
 import "./section-one.css";
 import jadidAdabiyoti from "../../data";
 import { data } from "autoprefixer";
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
+import cardImage from "../assets/images/sectionOneCardImage.png"
 
 function SectionOne() {
 //   const [event, setevent] = useState("");
@@ -44,11 +47,11 @@ function SectionOne() {
             </button>
           </form>
         </div>
-        <div className="border w-full h-[600px] flex flex-col items-center">
+        <div className="w-full h-[600px] flex flex-col items-center">
           <h1 className="font-satisfy text-3xl text-center">
             Asosiy kategoriyalar
           </h1>
-          <ul className="border flex justify-between w-2/3 mt-5">
+          <ul className="flex justify-between w-2/3 mt-5">
             <li>Temuriylar davri </li>
             <li>Jadid adabiyoti </li>
             <li>Sovet davri </li>
@@ -59,10 +62,12 @@ function SectionOne() {
             className="flex flex-wrap justify-center gap-6 mt-10"
           >
             {jadidAdabiyoti.map((item, index) => (
-              <div key={index} className="border w-[170px] text-center flex flex-col justify-between gap-2">
+              <div id="card" key={index} className="relative w-[170px] text-center flex flex-col justify-between rounded-2xl pb-3">
                 <img src={item.images} className="object-contain" />
                 <h1 className="text-[15px]">{item.name}</h1>
                 <h2 className="text-[12px] text-[#FFFFFF99]">{item.year}</h2>
+                <div className="flex items-center justify-evenly mt-1 text-sm"><span className="text-white flex items-center gap-1"><MenuBookIcon /> 34</span> <span className="text-white flex items-center gap-1"><MusicNoteIcon /> 13</span> </div>
+                <img className="section-one-card-bgImage" src={cardImage}  />
               </div>
             ))}
           </div>
