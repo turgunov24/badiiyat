@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../navbar/navbar";
 import SectionOneSwiper from "./section-one-assets/section-one-swiper/swiper";
 import "./section-one.css";
@@ -6,11 +6,14 @@ import jadidAdabiyoti from "../../data";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
 import cardImage from "../assets/images/sectionOneCardImage.png";
-import SectionTwo from "../section-two/section-two";
 import { Link } from "react-router-dom";
+import { Context } from "../contex";
+import Tablar from "./cardtab/tabs";
 
-function SectionOne() {
+function SectionOne(props) {
+    console.log(props);
   const [search, setSearch] = useState("");
+  const {orders, setOrders} = useContext(Context);
   const qidiruv = (e) => {
     setSearch(e.target.value);
   };
@@ -22,6 +25,12 @@ function SectionOne() {
         .includes(search.toString().toLowerCase())
     );
   });
+    let name = DataSearch.name
+    let arr = []
+    const Yubor = ()=>{
+        arr.push(...orders,{name})
+        setOrders(arr)
+    }
   return (
     <div id="sectionOne" className="w-full flex flex-col items-center ">
       <Navbar />
@@ -52,24 +61,15 @@ function SectionOne() {
           <h1 className="font-satisfy text-3xl text-center">
             Asosiy kategoriyalar
           </h1>
-          <ul className="flex justify-center w-2/3 mt-5 flex-wrap gap-10 items-center">
-            <li>Temuriylar davri </li>
-            <li>Jadid adabiyoti </li>
-            <li>Sovet davri </li>
-            <li>Mustaqillik davri</li>
-          </ul>
+          <Tablar />
           <div
             id="grid-container"
-           
           >
-            <Link to="sectionTwo"  className=" flex flex-wrap justify-center gap-6 mt-10">
+            {/* <Link to="sectionTwo" className=" flex flex-wrap justify-center gap-6 mt-10">
               {" "}
               {DataSearch.map((item, index) => (
                 <div
-                  onClick={() => {
-                    console.log(item.books);
-                    <SectionTwo id={jadidAdabiyoti.id} className="hidden" item={item.id} />;
-                  }}
+                  onClick={Yubor}
                   id="card"
                   key={index}
                   className="relative w-[170px] text-center flex flex-col justify-between rounded-2xl pb-3"
@@ -96,7 +96,7 @@ function SectionOne() {
                   />
                 </div>
               ))}
-            </Link>
+            </Link> */}
           </div>
         </div>
       </div>
