@@ -1,26 +1,25 @@
-import * as React from 'react';
-import { useContext } from 'react';
-import { Context } from '../../contex';
+import * as React from "react";
+import { useContext } from "react";
+import { Context } from "../../contex";
+import "../section-one.css"
 
 export default function Card(props) {
-    console.log(props);
-    const {orders, setOrders} = useContext(Context);
-    let title = props.name
-    let images = props.img
-    let desc = props.des
-    let arr = []
-    const Yubor = ()=>{
-        arr.push(...orders,{title,images})
-        setOrders(arr)
-    }
-    
+  console.log(props);
+  const { orders, setOrders } = useContext(Context);
+  let title = props.name;
+  let images = props.img;
+  let year = props.year
+  let arr = [];
+  const Yubor = () => {
+    arr.push(...orders, { title, images });
+    setOrders(arr);
+  };
+
   return (
-    <div onClick={Yubor} className='card w-[120px] height-[200px] border'>
-        <img src={images} alt="" />
-        <div className='bottom'>
-            <h3>{title}</h3>
-            <h2>{desc}</h2>
-        </div>
+    <div id="card" onClick={Yubor} className="card w-[130px] h-[160px] flex flex-col rounded-xl text-center pb-3 gap-1">
+      <img src={images} className="object-contain" />
+      <h6 className="text-sm" >{title}</h6>
+      <small>{year}</small>
     </div>
   );
 }

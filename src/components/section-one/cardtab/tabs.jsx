@@ -22,8 +22,8 @@ function Tablar() {
 
   return (
     <>
-      <AppBar className='appbar ' color='transparent' position='static'>
-        <Tabs>
+      <AppBar className='appbar flex justify-center' color='transparent' position='static'>
+        <Tabs >
           {
             categories && categories.map((e, i) => (
               <Tab className='Tab1' onClick={change} label={e} />
@@ -33,10 +33,10 @@ function Tablar() {
         </Tabs>
 
       </AppBar>
-      <div className='foodWrapper'>
+      <div className='foodWrapper border w-full flex flex-wrap justify-center gap-10 py-10'>
         {data && data.map((e, i) => (
-          <div key={i} >
-            <Card  name={e.name} img={e.images} des={e.desc}  />
+          <div key={i}>
+            <Card  name={e.name} img={e.images} des={e.desc} year={e.year}  />
           </div>
         ))}
       </div>
