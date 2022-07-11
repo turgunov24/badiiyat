@@ -1,19 +1,13 @@
 import React, { useContext } from 'react';
-import { Context } from '../contex';
-
+import { konteks } from '../section-one/section-one';
 
 
 function SectionTwo() {
-    const { orders } = useContext(Context);
+    const kkk = useContext(konteks)
+    console.log(kkk);
     return ( 
         <div>
-            {
-                orders && orders.map((item)=>(
-                    <div className='bg-white' key={'aliffdf'}>
-                       <h1>{item.name}</h1>
-                    </div>                
-                ))
-            }
+
         </div> 
     );
 }

@@ -1,36 +1,27 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, createContext } from "react";
 import Navbar from "../navbar/navbar";
 import SectionOneSwiper from "./section-one-assets/section-one-swiper/swiper";
 import "./section-one.css";
 import jadidAdabiyoti from "../../data";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import cardImage from "../assets/images/sectionOneCardImage.png";
 import { Link } from "react-router-dom";
-import { Context } from "../contex";
-import Tablar from "./cardtab/tabs";
+export const konteks = createContext();
 
-function SectionOne(props) {
-    console.log(props);
+function SectionOne() {
+  const [tog, settog] = useState(true);
+
   const [search, setSearch] = useState("");
-  const {orders, setOrders} = useContext(Context);
-  const qidiruv = (e) => {
+  const searchAndMap = (e) => {
     setSearch(e.target.value);
+    settog(true);
   };
-  let DataSearch = jadidAdabiyoti.filter((item) => {
-    return Object.keys(item).some((key) =>
-      item[key]
-        .toString()
-        .toLowerCase()
-        .includes(search.toString().toLowerCase())
-    );
-  });
-    let name = DataSearch.name
-    let arr = []
-    const Yubor = ()=>{
-        arr.push(...orders,{name})
-        setOrders(arr)
-    }
+  const [cats, setcats] = useState("");
+  const category = (cat) => {
+    setcats(cat.target.textContent);
+    settog(false);
+  };
+
   return (
     <div id="sectionOne" className="w-full flex flex-col items-center ">
       <Navbar />
@@ -46,7 +37,7 @@ function SectionOne(props) {
             className="w-full flex flex-col items-center gap-5 md:flex-row "
           >
             <input
-              onChange={qidiruv}
+              onChange={searchAndMap}
               maxLength={30}
               value={search}
               placeholder="Adiblar, kitoblar, audiolar, maqolalar..."
@@ -57,46 +48,66 @@ function SectionOne(props) {
             </button>
           </form>
         </div>
-        <div className="w-full h-[600px] flex flex-col items-center">
+        <div className="mt-2 w-full h-[600px] flex flex-col items-center ">
           <h1 className="font-satisfy text-3xl text-center">
             Asosiy kategoriyalar
           </h1>
-          <Tablar />
-          <div
-            id="grid-container"
-          >
-            {/* <Link to="sectionTwo" className=" flex flex-wrap justify-center gap-6 mt-10">
-              {" "}
-              {DataSearch.map((item, index) => (
-                <div
-                  onClick={Yubor}
-                  id="card"
-                  key={index}
-                  className="relative w-[170px] text-center flex flex-col justify-between rounded-2xl pb-3"
-                >
-                  <img
-                    src={item.images}
-                    className="object-contain"
-                    alt="smkac"
-                  />
-                  <h1 className="text-[15px]">{item.name}</h1>
-                  <h2 className="text-[12px] text-[#FFFFFF99]">{item.year}</h2>
-                  <div className="flex items-center justify-evenly mt-1 text-sm">
-                    <span className="text-white flex items-center gap-1">
-                      <MenuBookIcon /> 34
-                    </span>{" "}
-                    <span className="text-white flex items-center gap-1">
-                      <MusicNoteIcon /> 13
-                    </span>{" "}
-                  </div>
-                  <img
-                    className="section-one-card-bgImage"
-                    src={cardImage}
-                    alt="mod"
-                  />
-                </div>
-              ))}
-            </Link> */}
+          <ul className="flex-wrap flex mt-5 items-center justify-center">
+            <li onClick={category} className="px-5">
+              Temuriylar
+            </li>
+            <li onClick={category} className="px-5">
+              Jadid
+            </li>
+            <li onClick={category} className="px-5">
+              Sovet
+            </li>
+            <li onClick={category} className="px-5">
+              Mustaqillik
+            </li>
+          </ul>
+          <div className="mt-5 py-5 px-10 w-full overflow-y-scroll flex-wrap flex gap-10 justify-center">
+            {jadidAdabiyoti
+              .filter((cards) => {
+                if (tog == true) {
+                  if (cards.name.toLowerCase().includes(search.toLowerCase())) {
+                    return cards;
+                  } else if (search == "") {
+                    return cards;
+                  }
+                } else if (tog == false) {
+                  if (cards.type.toLowerCase().includes(cats.toLowerCase())) {
+                    return cards;
+                  }
+                }
+              })
+              .map((val, key) => {
+                return (
+                  <konteks.Provider value={val.name}>
+                    <div
+                      id="card"
+                      key={key}
+                      className="text-center w-[170px] h-[230px] pb-1 flex flex-col gap-0 items-center justify-between"
+                    >
+                      <img src={val.images} className="w-full object-cover" />
+                      <h6>
+                        <Link to="/sectionTwo">{val.name}</Link>{" "}
+                      </h6>
+                      <span className="text-sm">{val.year}</span>
+                      <p className="text-sm flex items-center gap-2">
+                        <span className="flex items-center">
+                          <MenuBookIcon />
+                          34
+                        </span>{" "}
+                        <span className="flex items-center">
+                          <MusicNoteIcon />
+                          13
+                        </span>
+                      </p>
+                    </div>
+                  </konteks.Provider>
+                );
+              })}
           </div>
         </div>
       </div>
