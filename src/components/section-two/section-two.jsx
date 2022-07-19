@@ -19,11 +19,11 @@ function SectionTwo() {
                         <div className='right w-[50%] '>
                             <h1 className='text-3xl'>{e.name}</h1>
                             <p className='text-sm mt-5'>{e.desc}</p>
-                            <div className='text-white'>
+                            <div className='mt-3 text-white flex gap-5 overflow-x-scroll py-5 '>
                                 {
                                     e.boks.map((k,l)=>{
                                         return(
-                                            <div key={l} className='text-white w-[200px] border'>
+                                            <div key={l} className='text-white w-[200px] shadow-xl'>
                                                 <img src={k.imgs} alt="cdk" />
                                             </div>
                                         )
