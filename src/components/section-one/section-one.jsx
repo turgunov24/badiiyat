@@ -1,17 +1,19 @@
-import React, { useContext, useState, createContext } from "react";
+import React, { useContext, useState } from "react";
 import Navbar from "../navbar/navbar";
 import SectionOneSwiper from "./section-one-assets/section-one-swiper/swiper";
 import "./section-one.css";
 import jadidAdabiyoti from "../../data";
 import MenuBookIcon from "@mui/icons-material/MenuBook";
 import MusicNoteIcon from "@mui/icons-material/MusicNote";
-import { Link } from "react-router-dom";
-export const konteks = createContext();
+import {useNavigate } from "react-router-dom";
+import { Context } from "../contex";
+
 
 function SectionOne() {
   const [tog, settog] = useState(true);
-
   const [search, setSearch] = useState("");
+  const {orders, setOrders} = useContext(Context);
+  const navigate = useNavigate()
   const searchAndMap = (e) => {
     setSearch(e.target.value);
     settog(true);
@@ -21,7 +23,6 @@ function SectionOne() {
     setcats(cat.target.textContent);
     settog(false);
   };
-
   return (
     <div id="sectionOne" className="w-full flex flex-col items-center ">
       <Navbar />
@@ -82,32 +83,42 @@ function SectionOne() {
                 }
               })
               .map((val, key) => {
+                const bos = () =>{
+                    navigate('/sectionTwo')
+                    let arr = []
+                    const name = val.name
+                    const year = val.year
+                    const img = val.images
+                    const desc = val.desc
+                    const boks = val.books
+                    arr.push({name,year,img,desc,boks})
+                    setOrders(arr)
+                }
                 return (
-                  <konteks.Provider value={val.name}>
                     <div
                       id="card"
                       key={key}
                       className="text-center w-[170px] h-[230px] pb-1 flex flex-col gap-0 items-center justify-between"
                     >
                       <img src={val.images} className="w-full object-cover" />
-                      <h6>
-                        <Link to="/sectionTwo">{val.name}</Link>{" "}
+                      <h6 onClick={bos}>
+                        {val.name}
                       </h6>
                       <span className="text-sm">{val.year}</span>
                       <p className="text-sm flex items-center gap-2">
-                        <span className="flex items-center">
-                          <MenuBookIcon />
-                          34
-                        </span>{" "}
-                        <span className="flex items-center">
-                          <MusicNoteIcon />
-                          13
-                        </span>
+                          <span className="flex items-center">
+                            <MenuBookIcon />
+                            34
+                          </span>{" "}
+                          <span className="flex items-center">
+                            <MusicNoteIcon />
+                            13
+                          </span>
                       </p>
                     </div>
-                  </konteks.Provider>
                 );
-              })}
+            })}
+            
           </div>
         </div>
       </div>
